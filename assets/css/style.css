@@ -7,7 +7,7 @@ body {
 
 p {
     color: white;
-    font-size: 24px;
+    font-size: 30px;
     font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -15,12 +15,12 @@ h2 { /* Character names */
     text-align: center;
 }
 
-.hp-text {
+.hp-text { /* Starting HP text */
     text-align: center;
 }
 
-.row-Images {
-    border: 2px solid red;
+.row-Images { /* The row of the images */
+    /* border: 2px solid red; */
 }
 
 .image-container {
@@ -34,4 +34,9 @@ img {
     margin-right: auto;
     width: 80%;
     height: auto;
+    padding: 4px;
+}
+
+.hidden-on-start {
+    visibility: hidden;
 }
