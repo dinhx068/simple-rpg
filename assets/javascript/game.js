@@ -16,9 +16,10 @@ jQuery.fn.visibilityToggle = function() {
 
 $(".image-container").on("click", function() {
     console.log("Did this work?");
-    // $(".image-container").fadeOut(500);
     $(".evil-goblin").visible();
-    $(".enemies-list").visible();
+    $(".enemy-list").visible();
+    $("#log-container").visible();
+    $(".log-line-1").text("Choose an enemy to attack");
 })
 
 });

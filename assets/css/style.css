@@ -3,12 +3,17 @@ body {
     margin: 0;
     background: url("../images/background.png");
     background-repeat: no-repeat;
-  }
+}
+
+#main-container {
+    padding: 20px;
+}
 
 p {
     color: white;
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    margin: 10 0 10 0;
 }
 
 h2 { /* Character names */
@@ -21,9 +26,11 @@ h2 { /* Character names */
 
 .row-Images { /* The row of the images */
     /* border: 2px solid red; */
+    padding: 10px;
 }
 
 .image-container {
+    text-align: center; /* to align text within container */
     display: inline-block;
     background-color: white;
 }
@@ -34,9 +41,17 @@ img {
     margin-right: auto;
     width: 80%;
     height: auto;
-    padding: 4px;
+    padding: 2px;
 }
 
 .hidden-on-start {
     visibility: hidden;
+}
+
+.health-points {
+    color: black;
+}
+
+#log-container {
+    width: 400px;
 }

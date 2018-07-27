@@ -5,84 +5,92 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simple RPG</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
 </head>
-
     <body>
-        <div id= "container">
+        <div id= "main-container">
 
-            <p>Choose your character</p>
+            <p>Characters</p>
 
             <div class="row-1">
                     <ul class="row-Images">
 
                         <div class="image-container">
                             <h2 class="character-name">Slayer</h2>
-                                <li><img src="assets/images/slayer.png"/></li>
-                            <div class="slayer-hp hp-text">100</div>
+                                <li><img class="slayer" src="assets/images/slayer.png"/></li>
+                            <span class="health-points">Health Points</span> <span class="slayer-hp">100</span>
                         </div>
 
                         <div class="image-container">
                             <h2 class="character-name">Elf</h2>
-                                <li><img src="assets/images/elf.png"/></li>
-                            <div class="elf-hp hp-text">80</div>
+                                <li><img class="elf" src="assets/images/elf.png"/></li>
+                            <span class="health-points">Health Points</span> <span class="elf-hp">80</span>
                         </div>
 
                         <div class="image-container">
                             <h2 class="character-name">Mage</h2>
-                                <li><img src="assets/images/mage.png"/></li>
-                            <div class="mage-hp hp-text">70</div>
+                                <li><img class="mage" src="assets/images/mage.png"/></li>
+                            <span class="health-points">Health Points</span> <span class="mage-hp">70</span>
                         </div>
 
                         <div class="image-container">
                             <h2 class="character-name">Goblin</h2>
-                                <li><img src="assets/images/goblin_4.png"/></li>
-                            <div class="goblin_4-hp hp-text">80</div>
+                                <li><img class="goblin_4" src="assets/images/goblin_4.png"/></li>
+                            <span class="health-points">Health Points</span> <span class="goblin_4-hp">80</span>
                         </div>
 
                     </ul>
-                </div>
+                </div> <!-- End of row 1 -->
 
-            <p class="hidden-on-start enemies-list">Enemies Available to attack</p>
+            <p class="hidden-on-start enemy-list">Enemies Available to attack</p>
                 
-                <div class="row-2">
-                    <ul class="row-Images">
+            <div class="row-2">
+                <ul class="row-Images">
 
-                        <div class="image-container hidden-on-start evil-goblin">
-                            <h2 class="character-name">Little Goblin</h2>
-                                <li><img src="assets/images/goblin_1.png"/></li>
-                            <div class="goblin_1-hp hp-text">30</div>
-                        </div>
+                    <div class="image-container hidden-on-start evil-goblin">
+                        <h2 class="character-name">Little Goblin</h2>
+                            <li><img src="assets/images/goblin_1.png"/></li>
+                        <span class="health-points">Health Points</span> <span class="goblin_1-hp">30</span>
+                    </div>
 
-                        <div class="image-container hidden-on-start evil-goblin">
-                            <h2 class="character-name">Goblin</h2>
-                                <li><img src="assets/images/goblin_2.png"/></li>
-                            <div class="goblin_2-hp hp-text">50</div>
-                        </div>
+                    <div class="image-container hidden-on-start evil-goblin">
+                        <h2 class="character-name">Goblin</h2>
+                            <li><img src="assets/images/goblin_2.png"/></li>
+                            <span class="health-points">Health Points</span> <span class="goblin_2-hp">50</span>
+                    </div>
 
-                        <div class="image-container hidden-on-start evil-goblin">
-                            <h2 class="character-name">Crazy Goblin</h2>
-                                <li><img src="assets/images/goblin_3.png"/></li>
-                            <div class="goblin_3-hp hp-text">100</div>
-                        </div>
+                    <div class="image-container hidden-on-start evil-goblin">
+                        <h2 class="character-name">Crazy Goblin</h2>
+                            <li><img src="assets/images/goblin_3.png"/></li>
+                        <span class="health-points">Health Points</span> <span class="goblin_3-hp">150</span>
+                    </div>
 
-                        <div class="image-container hidden-on-start evil-goblin ">
-                            <h2 class="character-name">Goblin Boss</h2>
-                                <li><img src="assets/images/goblin_boss.png"/></li>
-                            <div class="goblin_boss-hp hp-text">300</div>
-                        </div>
+                    <div class="image-container hidden-on-start goblin_boss">
+                        <h2 class="character-name">Goblin Boss</h2>
+                            <li><img src="assets/images/goblin_boss.png"/></li>
+                        <span class="health-points">Health Points</span> <span class="goblin_boss-hp">500</span>
+                    </div>
 
-                    </ul>
+                </ul>
+            </div> <!-- End of row 2 -->
+
+            <!-- To log what's happening in game-->
+            <div id="log-container">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Log</div>
+                    <div class="panel-body log-line-1">Choose your character</div>
+                    <div class="panel-body log-line-2"></div>
                 </div>
+            </div>
 
-            <p class="hidden-on-start">Action</p>
+            <input class="" type="button" value="Restart" onClick="window.location.reload()">
 
         </div> <!-- End on container -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="assets/javascript/game.js"></script>
-
     </body>
-
 </html>
