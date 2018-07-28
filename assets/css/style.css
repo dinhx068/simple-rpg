@@ -1,7 +1,7 @@
 body {
     padding: 0;
     margin: 0;
-    background: url("../images/background.png");
+    background: url("../images/background_2.png");
     background-repeat: no-repeat;
 }
 
@@ -29,7 +29,7 @@ h2 { /* Character names */
     padding: 10px;
 }
 
-.image-container, .container-to-clone {
+.image-container, .container-to-clone, .action-container {
     text-align: center; /* to align text within container */
     display: inline-block;
     background-color: white;
@@ -57,6 +57,18 @@ img {
     padding: 10px;
 }
 
+.action-container {
+    margin-bottom: 20px;
+}
+
 button {
-    margin-top: 8px;
+    margin-top: 4px;
+}
+
+#attack-button-1 {
+    margin-left: 13px;
+}
+
+#attack-button-2 {
+    margin-left: 3px;
 }
