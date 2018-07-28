@@ -29,7 +29,7 @@ h2 { /* Character names */
     padding: 10px;
 }
 
-.image-container {
+.image-container, .container-to-clone {
     text-align: center; /* to align text within container */
     display: inline-block;
     background-color: white;
@@ -54,4 +54,9 @@ img {
 
 #log-container {
     width: 400px;
+    padding: 10px;
+}
+
+button {
+    margin-top: 8px;
 }
