@@ -1,6 +1,11 @@
 // Global variables
 var enemySelected = false;
 
+function testSelection() {
+    var test = $(".slayer-container").on("click");
+    console.log(test);
+}
+
 $(document).ready(function() {
 
 jQuery.fn.visible = function() {
@@ -18,7 +23,10 @@ jQuery.fn.visibilityToggle = function() {
 };
 
 // When th user clicks on one of the starting characters
-$(".slayer-container").one("click", function() {
+$(".slayer-container").on("click", function() {
+
+    testSelection();
+    
     $("#characters").text("Character Chosen");
 
     $(".elf-container").hide();
@@ -30,7 +38,7 @@ $(".slayer-container").one("click", function() {
     $(".enemy-list").visible();
     $(".log-line-1").text("Choose an enemy to attack");
     // console.log($(".slayer-hp").text() - 5); Gets hp
-    // $(".slayer-hp").text($(".slayer-hp").text() - 5); Gets hp and displays on screen
+    $(".slayer-hp").text($(".slayer-hp").text() - 5); //Gets hp and displays on screen
 })
 
 $(".elf-container").one("click", function() {
