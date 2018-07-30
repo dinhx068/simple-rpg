@@ -60,6 +60,7 @@ var goblin_boss = {
 function attack() {
     $(".log-line-1").text("Testing attack button");
     if (characterSelected == true && enemySelected == true) {
+        $(".sword-placeholder").visible();
         // Do calculations
         // And Log onto screen
         console.log("Testing attack ");
@@ -138,8 +139,6 @@ $(".selection").one("click", function () {
     }
 
     characterSelected = true;
-    $(".sword-placeholder").visible();
-    $(".action-container").visible();
     $(".evil-goblin").visible();
     $(".enemy-list").visible();
     $(".log-line-1").text("Choose an enemy to attack");
@@ -156,6 +155,7 @@ $(".evil-goblin").on("click", function() {
         $(".container-to-clone").append($("#goblin_1")); // But removes the current position copy
 
         enemySelected = true; // So we don't fight mutiple enemies
+        $(".attackButton").visible();
         //$(".goblin_1").hide();
         //$(".goblin_1").invisible();
     } else {
