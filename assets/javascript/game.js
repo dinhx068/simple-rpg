@@ -52,21 +52,21 @@ $(".selection").one("click", function () {
     var selection = this.id;
     
     if(selection == "slayer-container") {
-        $(".elf-container").hide();
-        $(".priestess-container").hide();
-        $(".goblin-container").hide();
+        $("#elf-container").hide();
+        $("#priestess-container").hide();
+        $("#goblin-container").hide();
     } else if (selection == "elf-container") {
-        $(".slayer-container").hide();
-        $(".priestess-container").hide();
-        $(".goblin-container").hide();
+        $("#slayer-container").hide();
+        $("#priestess-container").hide();
+        $("#goblin-container").hide();
     } else if (selection == "priestess-container") {
-        $(".slayer-container").hide();
-        $(".elf-container").hide();
-        $(".goblin-container").hide();
+        $("#slayer-container").hide();
+        $("#elf-container").hide();
+        $("#goblin-container").hide();
     } else if (selection == "goblin-container") {
-        $(".slayer-container").hide();
-        $(".priestess-container").hide();
-        $(".elf-container").hide();
+        $("#slayer-container").hide();
+        $("#priestess-container").hide();
+        $("#elf-container").hide();
     }
 
     $(".action-container").visible();
@@ -76,66 +76,12 @@ $(".selection").one("click", function () {
     // console.log($(".slayer-hp").text() - 5); Gets hp
     //$(".slayer-hp").text($(".slayer-hp").text() - 5); //Gets hp and displays on screen
 })
-/*    
-    $("#characters").text("Character Chosen");
-
-    $(".elf-container").hide();
-    $(".priestess-container").hide();
-    $(".goblin-container").hide();
-
-    $(".action-container").visible();
-    $(".evil-goblin").visible();
-    $(".enemy-list").visible();
-    $(".log-line-1").text("Choose an enemy to attack");
-    // console.log($(".slayer-hp").text() - 5); Gets hp
-    $(".slayer-hp").text($(".slayer-hp").text() - 5); //Gets hp and displays on screen
-})
-
-$(".elf-container").one("click", function() {
-    $("#characters").text("Character Chosen");
-
-    $(".slayer-container").hide();
-    $(".priestess-container").hide();
-    $(".goblin-container").hide();
-
-    $(".action-container").visible();
-    $(".evil-goblin").visible();
-    $(".enemy-list").visible();
-    $(".log-line-1").text("Choose an enemy to attack");
-})
-
-$(".priestess-container").one("click", function() {
-    $("#characters").text("Character Chosen");
-
-    $(".slayer-container").hide();
-    $(".elf-container").hide();
-    $(".goblin-container").hide();
-
-    $(".action-container").visible();
-    $(".evil-goblin").visible();
-    $(".enemy-list").visible();
-    $(".log-line-1").text("Choose an enemy to attack");
-})
-
-$(".goblin-container").one("click", function() {
-    $("#characters").text("Character Chosen");
-
-    $(".slayer-container").hide();
-    $(".priestess-container").hide();
-    $(".elf-container").hide();
-
-    $(".action-container").visible();
-    $(".evil-goblin").visible();
-    $(".enemy-list").visible();
-    $(".log-line-1").text("Choose an enemy to attack");
-}) // End of selection... there has to be a better way of doing this
-*/
 
 // When we select the first enemy to attack
-$(".goblin_1").on("click", function() {
+$("#goblin_1").on("click", function() {
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
-        var $cloneGoblin = $(".goblin_1").clone();
+        var $cloneGoblin = $("#goblin_1").clone();
         $(".container-to-clone").html($cloneGoblin);
         enemySelected = true; // So we don't fight mutiple enemies
         //$(".goblin_1").hide();
