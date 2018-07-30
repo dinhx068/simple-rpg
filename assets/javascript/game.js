@@ -1,11 +1,34 @@
-// Global variables
+// GLOBAL VARIABLES
+var characterSelected = false;
 var enemySelected = false;
 
-function testSelection() {
-    var test = $(".slayer-container").on("click");
-    console.log(test);
+
+// FUNCTIONS
+function attack() {
+    $(".log-line-1").text("Testing attack button");
+    if (characterSelected == true) {
+        // Do calculations
+        // And Log onto screen
+    } else {
+        $(".log-line-1").text("You do not have an enemy selected");
+        $(".log-line-2").text("");
+    }
 }
 
+function runAway() {
+    if (enemySelected == true) {
+        enemySelected = false;
+        console.log("Testing runAway function, if half")
+        $(".log-line-1").text("You fled from the enemy");
+        $(".log-line-2").text("");
+    } else {
+        console.log("Testing runAway function, else half")
+        $(".log-line-1").text("Nothing happens");
+        $(".log-line-2").text("");
+    }
+}
+
+// JQUERY STUFF
 $(document).ready(function() {
 
 jQuery.fn.visible = function() {
@@ -23,10 +46,37 @@ jQuery.fn.visibilityToggle = function() {
 };
 
 // When th user clicks on one of the starting characters
-$(".slayer-container").on("click", function() {
-
-    testSelection();
+$(".selection").one("click", function () {
+    $("#characters").text("Character Chosen");
+    console.log("testing id on click, " + this.id);
+    var selection = this.id;
     
+    if(selection == "slayer-container") {
+        $(".elf-container").hide();
+        $(".priestess-container").hide();
+        $(".goblin-container").hide();
+    } else if (selection == "elf-container") {
+        $(".slayer-container").hide();
+        $(".priestess-container").hide();
+        $(".goblin-container").hide();
+    } else if (selection == "priestess-container") {
+        $(".slayer-container").hide();
+        $(".elf-container").hide();
+        $(".goblin-container").hide();
+    } else if (selection == "goblin-container") {
+        $(".slayer-container").hide();
+        $(".priestess-container").hide();
+        $(".elf-container").hide();
+    }
+
+    $(".action-container").visible();
+    $(".evil-goblin").visible();
+    $(".enemy-list").visible();
+    $(".log-line-1").text("Choose an enemy to attack");
+    // console.log($(".slayer-hp").text() - 5); Gets hp
+    //$(".slayer-hp").text($(".slayer-hp").text() - 5); //Gets hp and displays on screen
+})
+/*    
     $("#characters").text("Character Chosen");
 
     $(".elf-container").hide();
@@ -79,6 +129,7 @@ $(".goblin-container").one("click", function() {
     $(".enemy-list").visible();
     $(".log-line-1").text("Choose an enemy to attack");
 }) // End of selection... there has to be a better way of doing this
+*/
 
 // When we select the first enemy to attack
 $(".goblin_1").on("click", function() {
