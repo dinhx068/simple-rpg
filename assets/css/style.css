@@ -35,6 +35,12 @@ h2 { /* Character names */
     background-color: white;
 }
 
+.sword-placeholder {
+    display: inline-block;
+    width: 10%;
+    height: 10%;
+}
+
 img {
     display: block;
     margin-left: auto;

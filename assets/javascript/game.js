@@ -69,6 +69,7 @@ $(".selection").one("click", function () {
         $("#elf-container").hide();
     }
 
+    $(".sword-placeholder").visible();
     $(".action-container").visible();
     $(".evil-goblin").visible();
     $(".enemy-list").visible();
