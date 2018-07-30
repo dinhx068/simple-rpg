@@ -18,8 +18,8 @@ var slayer = {
 };
 
 var dwarf = {
-    hp: 125,
-    attack: 8,
+    hp: 150,
+    attack: 6,
 };
 
 var elf = {
