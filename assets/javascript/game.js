@@ -2,6 +2,53 @@
 var characterSelected = false;
 var enemySelected = false;
 
+// GOOD CHARACTERS
+// Balancing needs to be done
+var slayer = {
+    hp: 100,
+    attack: 10,
+};
+
+var elf = {
+    hp: 80,
+    attack: 12,
+};
+
+var priestess = {
+    hp: 50,
+    attack: 15,
+};
+
+var goodGoblin = {
+    hp: 80,
+    attack: 11,
+};
+
+// ENEMIES
+var goblin_1 = {
+    hp: 30,
+    attack: 3,
+};
+
+var goblin_2 = {
+    hp: 50,
+    attack: 4,
+};
+
+var goblin_3 = {
+    hp: 100,
+    attack: 5,
+};
+
+var bad_goblin = {
+    hp: 175,
+    attack: 6,
+};
+
+var goblin_boss = {
+    hp: 350,
+    attack: 10,
+};
 
 // FUNCTIONS
 function attack() {
@@ -82,8 +129,9 @@ $(".selection").one("click", function () {
 $("#goblin_1").on("click", function() {
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
-        var $cloneGoblin = $("#goblin_1").clone();
-        $(".container-to-clone").html($cloneGoblin);
+        //var $cloneGoblin = $("#goblin_1").clone();
+        //$(".container-to-clone").append($cloneGoblin);
+        $(".container-to-clone").append($("#goblin_1")); // But removes the current position copy
         enemySelected = true; // So we don't fight mutiple enemies
         //$(".goblin_1").hide();
         //$(".goblin_1").invisible();
@@ -91,7 +139,7 @@ $("#goblin_1").on("click", function() {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
     }
-    
+
 })
 
 });
