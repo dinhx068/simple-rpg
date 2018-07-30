@@ -86,13 +86,21 @@ function runAway() {
     if (enemySelected == true) {
         enemySelected = false;
         console.log("Testing runAway function, if half")
+
         $(".log-line-1").text("You fled from the enemy");
         $(".log-line-2").text("");
     } else {
         console.log("Testing runAway function, else half")
+
         $(".log-line-1").text("Nothing happens");
         $(".log-line-2").text("");
     }
+}
+
+// Testing purposes
+function usePotion() {
+    $(".log-line-1").text("This is for testing purposes");
+    $(".log-line-2").text("");
 }
 
 // JQUERY STUFF
@@ -147,8 +155,8 @@ $(".selection").one("click", function () {
     }
 
     characterSelected = true;
-    $(".evil-goblin").visible();
     $(".enemy-list").visible();
+    $(".shown-first").visible();
     $(".log-line-1").text("Choose an enemy to attack");
     //$(".slayer-hp").text($(".slayer-hp").text()); // Gets hp and displays on screen
 })
@@ -162,6 +170,8 @@ $(".evil-goblin").on("click", function() {
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
         enemySelected = true; // So user does not fight mutiple enemies
         $(".attackButton").visible();
+        //$(".runAwayButton").visible();
+        $(".usePotionButton").visible();
 
         //enemyHp = $("."+this.id+"-hp").text(); // Gets the html number
         console.log("this id test, " + this.id);
