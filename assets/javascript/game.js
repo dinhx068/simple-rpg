@@ -136,8 +136,7 @@ jQuery.fn.visibilityToggle = function() {
 // When th user selects on one of the starting characters
 $(".selection").one("click", function () {
     $(".left-header").text("Character Chosen");
-    $(".right-header").visible();
-    
+
     console.log("testing id on click, " + this.id);
     let selection = this.id;
     
@@ -178,6 +177,7 @@ $(".selection").one("click", function () {
 
 // When user selects an enemy to attack
 $(".evil-goblin").on("click", function() {
+    $(".right-header").visible();
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
         //var $cloneGoblin = $("#goblin_1").clone();
