@@ -135,7 +135,9 @@ jQuery.fn.visibilityToggle = function() {
 
 // When th user selects on one of the starting characters
 $(".selection").one("click", function () {
-    $("#characters").text("Character Chosen");
+    $(".left-header").text("Character Chosen");
+    $(".right-header").visible();
+    
     console.log("testing id on click, " + this.id);
     let selection = this.id;
     
