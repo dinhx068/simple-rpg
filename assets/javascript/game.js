@@ -91,6 +91,7 @@ $("#goblin_1").on("click", function() {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
     }
+    
 })
 
 });
