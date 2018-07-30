@@ -108,7 +108,7 @@ jQuery.fn.visibilityToggle = function() {
 $(".selection").one("click", function () {
     $("#characters").text("Character Chosen");
     console.log("testing id on click, " + this.id);
-    var selection = this.id;
+    let selection = this.id;
     
     if (selection == "slayer-container") {
         $("#dwarf-container").hide();
@@ -148,16 +148,14 @@ $(".selection").one("click", function () {
 
 // When we select the first enemy to attack
 $(".evil-goblin").on("click", function() {
+    console.log("testing id on click, " + this.id);
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
         //var $cloneGoblin = $("#goblin_1").clone();
         //$(".container-to-clone").append($cloneGoblin);
-        $(".container-to-clone").append($("#goblin_1")); // But removes the current position copy
-
-        enemySelected = true; // So we don't fight mutiple enemies
+        $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
+        enemySelected = true; // So user does not fight mutiple enemies
         $(".attackButton").visible();
-        //$(".goblin_1").hide();
-        //$(".goblin_1").invisible();
     } else {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
