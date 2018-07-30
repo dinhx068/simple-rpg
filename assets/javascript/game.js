@@ -1,7 +1,14 @@
 // GLOBAL VARIABLES
 var characterSelected = false;
 var enemySelected = false;
+
 var killCount = 0;
+
+var userHp;
+var userAttackPower;
+var enemyHp;
+var userEnemyPower;
+
 
 // GOOD CHARACTERS
 // Balancing needs to be done
@@ -64,6 +71,7 @@ function attack() {
         // Do calculations
         // And Log onto screen
         console.log("Testing attack ");
+        console.log(enemyHp);
         $(".log-line-1").text("You take x damage");
         $(".log-line-2").text("The enemy takes x damage");
     } else {
@@ -115,7 +123,7 @@ $(".selection").one("click", function () {
         $("#elf-container").hide();
         $("#priestess-container").hide();
         $("#goblin-container").hide();
-        //$(".bad-goblin").append($("#goblin-container")); // not working as it should
+        //$(".bad-goblin").append($("#goblin-container")); // Not working as it should
     } else if (selection == "dwarf-container") {
         $("#slayer-container").hide();
         $("#elf-container").hide();
@@ -142,13 +150,11 @@ $(".selection").one("click", function () {
     $(".evil-goblin").visible();
     $(".enemy-list").visible();
     $(".log-line-1").text("Choose an enemy to attack");
-    // console.log($(".slayer-hp").text() - 5); Gets hp
-    //$(".slayer-hp").text($(".slayer-hp").text() - 5); //Gets hp and displays on screen
+    //$(".slayer-hp").text($(".slayer-hp").text()); // Gets hp and displays on screen
 })
 
-// When we select the first enemy to attack
+// When user selects an enemy to attack
 $(".evil-goblin").on("click", function() {
-    console.log("testing id on click, " + this.id);
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
         //var $cloneGoblin = $("#goblin_1").clone();
@@ -156,6 +162,11 @@ $(".evil-goblin").on("click", function() {
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
         enemySelected = true; // So user does not fight mutiple enemies
         $(".attackButton").visible();
+
+        //enemyHp = $("."+this.id+"-hp").text(); // Gets the html number
+        console.log("this id test, " + this.id);
+        enemyHp = (this.id).hp;
+        console.log("this id.hp test, " + enemyHp);
     } else {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
