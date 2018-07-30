@@ -1,6 +1,7 @@
 // GLOBAL VARIABLES
 var characterSelected = false;
 var enemySelected = false;
+var killCount = 0;
 
 // GOOD CHARACTERS
 // Balancing needs to be done
@@ -58,12 +59,17 @@ var goblin_boss = {
 // FUNCTIONS
 function attack() {
     $(".log-line-1").text("Testing attack button");
-    if (characterSelected == true) {
+    if (characterSelected == true && enemySelected == true) {
         // Do calculations
         // And Log onto screen
+        console.log("Testing attack ");
+        $(".log-line-1").text("You take x damage");
+        $(".log-line-2").text("The enemy takes x damage");
     } else {
+        console.log("else characterSelected, " + characterSelected);
+        console.log("else enemySelected, " + enemySelected);
         $(".log-line-1").text("You do not have an enemy selected");
-        $(".log-line-2").text("");
+        $(".log-line-2").text("Select an enemy");
     }
 }
 
@@ -131,6 +137,7 @@ $(".selection").one("click", function () {
         $("#elf-container").hide();
     }
 
+    characterSelected = true;
     $(".sword-placeholder").visible();
     $(".action-container").visible();
     $(".evil-goblin").visible();
@@ -141,12 +148,13 @@ $(".selection").one("click", function () {
 })
 
 // When we select the first enemy to attack
-$("#goblin_1").on("click", function() {
+$(".evil-goblin").on("click", function() {
     // If there is no enemy selected then we move the goblin into position
     if (!enemySelected) {
         //var $cloneGoblin = $("#goblin_1").clone();
         //$(".container-to-clone").append($cloneGoblin);
         $(".container-to-clone").append($("#goblin_1")); // But removes the current position copy
+
         enemySelected = true; // So we don't fight mutiple enemies
         //$(".goblin_1").hide();
         //$(".goblin_1").invisible();
