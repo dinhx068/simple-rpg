@@ -9,6 +9,11 @@ var slayer = {
     attack: 10,
 };
 
+var dwarf = {
+    hp: 125,
+    attack: 8,
+};
+
 var elf = {
     hp: 80,
     attack: 12,
@@ -92,26 +97,36 @@ jQuery.fn.visibilityToggle = function() {
     });
 };
 
-// When th user clicks on one of the starting characters
+// When th user selects on one of the starting characters
 $(".selection").one("click", function () {
     $("#characters").text("Character Chosen");
     console.log("testing id on click, " + this.id);
     var selection = this.id;
     
-    if(selection == "slayer-container") {
+    if (selection == "slayer-container") {
+        $("#dwarf-container").hide();
+        $("#elf-container").hide();
+        $("#priestess-container").hide();
+        $("#goblin-container").hide();
+        //$(".bad-goblin").append($("#goblin-container")); // not working as it should
+    } else if (selection == "dwarf-container") {
+        $("#slayer-container").hide();
         $("#elf-container").hide();
         $("#priestess-container").hide();
         $("#goblin-container").hide();
     } else if (selection == "elf-container") {
         $("#slayer-container").hide();
+        $("#dwarf-container").hide();
         $("#priestess-container").hide();
         $("#goblin-container").hide();
     } else if (selection == "priestess-container") {
         $("#slayer-container").hide();
+        $("#dwarf-container").hide();
         $("#elf-container").hide();
         $("#goblin-container").hide();
     } else if (selection == "goblin-container") {
         $("#slayer-container").hide();
+        $("#dwarf-container").hide();
         $("#priestess-container").hide();
         $("#elf-container").hide();
     }
