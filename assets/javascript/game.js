@@ -104,6 +104,19 @@ function usePotion() {
 }
 
 // JQUERY STUFF
+window.onload = function () {
+    document.getElementById('button').onclick = function () {
+        document.getElementById('modal').style.display = "none"
+    };
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 $(document).ready(function() {
 
 jQuery.fn.visible = function() {
