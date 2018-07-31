@@ -1,7 +1,9 @@
 // GLOBAL VARIABLES
 var characterSelected = false;
 var enemySelected = false;
+var currentEnemy;
 
+var attackCount = 1;
 var killCount = 0;
 
 var userHp;
@@ -82,25 +84,44 @@ function attack() {
     }
 }
 
+// Testing purposes
+function usePotion() {
+    $(".log-line-1").text("This is for testing purposes");
+    $(".log-line-2").text("");
+}
+
 function runAway() {
     if (enemySelected == true) {
         enemySelected = false;
         console.log("Testing runAway function, if half")
-
         $(".log-line-1").text("You fled from the enemy");
         $(".log-line-2").text("");
     } else {
         console.log("Testing runAway function, else half")
-
         $(".log-line-1").text("Nothing happens");
         $(".log-line-2").text("");
     }
 }
 
-// Testing purposes
-function usePotion() {
-    $(".log-line-1").text("This is for testing purposes");
-    $(".log-line-2").text("");
+function incrementAttack() {
+    // On every odd attack count increment attack by 1
+    if (Math.abs(attackCount % 2) == 1) {
+        attackCount++;
+        userAttackPower++;
+    } else {
+        attackCount++;
+    }
+}
+
+function enemyKO() {
+    if (enemyHp <= 0  ) {
+        console.log(currentEnemy);
+        $("#"+currentEnemy).hide();
+        killCount ++;
+        enemySelected = false;
+    } else {
+        console.log("Enemy is above zero hp");
+    }
 }
 
 // JQUERY STUFF
@@ -196,18 +217,23 @@ $(".evil-goblin").on("click", function() {
     // which is used for damage calculation during interaction
     if (!enemySelected) {
         if (selection == "goblin_1") {
+            currentEnemy = selection;
             enemyHp = goblin_1.hp;
             enemyAttackPower = goblin_1.attack;
         } else if (selection == "goblin_2") {
+            currentEnemy = selection;
             enemyHp = goblin_2.hp;
             enemyAttackPower = goblin_2.attack;
         } else if (selection == "goblin_3") {
+            currentEnemy = selection;
             enemyHp = goblin_3.hp;
             enemyAttackPower = goblin_3.attack;
         } else if (selection == "bad_goblin") {
+            currentEnemy = selection;
             enemyHp = bad_goblin.hp;
             enemyAttackPower = bad_goblin.attack;
         } else if (selection == "goblin_boss"){
+            currentEnemy = selection;
             enemyHp = goblin_boss.hp;
             enemyAttackPower = goblin_boss.attack;
         } else {
@@ -222,10 +248,11 @@ $(".evil-goblin").on("click", function() {
         //$(".runAwayButton").visible();
         $(".usePotionButton").visible();
 
-        //enemyHp = $("."+this.id+"-hp").text(); // Gets the html number
-        console.log("this id test, " + this.id);
+        // enemyHp = $("."+this.id+"-hp").text(); // Gets the html number
+        // Stuff below not working, this.ObjectProperty does not work
+        /* console.log("this id test, " + this.id);
         enemyHp = (this.id).hp;
-        console.log("this id.hp test, " + enemyHp);
+        console.log("this id.hp test, " + enemyHp);*/
     } else {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
