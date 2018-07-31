@@ -32,12 +32,12 @@ var elf = {
 };
 
 var priestess = {
-    hp: 60,
-    attack: 15,
+    hp: 65,
+    attack: 16,
 };
 
 var goodGoblin = {
-    hp: 80,
+    hp: 85,
     attack: 11,
 };
 
@@ -54,12 +54,12 @@ var goblin_2 = {
 
 var goblin_3 = {
     hp: 100,
-    attack: 4,
+    attack: 5,
 };
 
 var bad_goblin = {
     hp: 125,
-    attack: 3,
+    attack: 4,
 };
 
 var goblin_boss = {
@@ -69,26 +69,21 @@ var goblin_boss = {
 
 // FUNCTIONS
 function attack() {
-    $(".log-line-1").text("Testing attack button");
     if (characterSelected == true && enemySelected == true) {
         $(".sword-placeholder").visible();
-        console.log("Testing attack ");
         incrementAttack();
         userHp = userHp - enemyAttackPower;
         enemyHp = enemyHp -userAttackPower;
         userDeadOrAlive();
         enemyKO();
-        console.log(currentEnemy);
+
+        // Update html hp numbers
         $(".user-hp").html(userHp);
         $("."+String(currentEnemy+"-hp")).html(enemyHp);
-        console.log(userHp);
-        console.log(enemyHp);
 
         $(".log-line-1").text("You take " + enemyAttackPower + " damage");
         $(".log-line-2").text("The enemy takes " + userAttackPower + " damage");
     } else {
-        console.log("else characterSelected, " + characterSelected);
-        console.log("else enemySelected, " + enemySelected);
         $(".log-line-1").text("You do not have an enemy selected");
         $(".log-line-2").text("Select an enemy");
     }
@@ -100,20 +95,19 @@ function usePotion() {
     if (potion > 0) {
         let expectedHp = userHp + 50;
         if (expectedHp >= userMaxHp) {
-            console.log("testing"+ (userHp + 50));
             userHp = userMaxHp;
             potion --;
             $(".user-hp").html(userHp);
+            $(".log-line-1").text("You used a potion to get max health");
+            $(".log-line-2").text("");
         } else {
             userHp += 50;
             potion --;
             $(".user-hp").html(userHp);
-            console.log(expectedHp);
-            console.log(userHp);
-            console.log(userMaxHp);
+            $(".log-line-1").text("You used a potion, +50 health points");
+            $(".log-line-2").text("");
         }
-        $(".log-line-1").text("You used a potion, +50 health points");
-        $(".log-line-2").text("");
+
     } else {
         $(".log-line-1").text("No potions to use");
         $(".log-line-2").text("");
@@ -123,11 +117,9 @@ function usePotion() {
 function runAway() {
     if (enemySelected == true) {
         enemySelected = false;
-        console.log("Testing runAway function, if half")
         $(".log-line-1").text("You fled from the enemy");
         $(".log-line-2").text("");
     } else {
-        console.log("Testing runAway function, else half")
         $(".log-line-1").text("Nothing happens");
         $(".log-line-2").text("");
     }
@@ -145,15 +137,17 @@ function incrementAttack() {
 
 function userDeadOrAlive() {
     if (userHp <= 0  ) {
-        console.log("DEAD, well should be");
+        disableButtons();
+        $(".restartButton").visible();
+        $(".log-line-1").text("You have been defeated");
+        $(".log-line-2").text("Try again? Restart button below");
     } else {
-        console.log("User hp is above zero");
+        // Do nothing
     }
 }
 
 function enemyKO() {
     if (enemyHp <= 0  ) {
-        console.log(currentEnemy);
         $("#"+currentEnemy).hide();
         $(".sword-placeholder").invisible();
         $(".right-header").invisible();
@@ -167,16 +161,24 @@ function enemyKO() {
                 $(".log-line-1").text("You find two potions");
                 $(".log-line-2").text("");
             } else if (killCount == 5){
-                console.log("Victory screen");
+                // Victory!
+                disableButtons();
                 $(".restartButton").visible();
+
+                $(".log-line-1").text("You've completed the game, thanks for playing!!");
+                $(".log-line-2").text("");
                 
             } else {
-                console.log("Not enough kills");
                 // Do nothing
             }
     } else {
-        console.log("Enemy is above zero hp");
+        // Do nothing
     }
+}
+
+function disableButtons() {
+    $(".attackButton").prop("disabled",true);
+    $(".potionButton").prop("disabled",true);
 }
 
 // JQUERY STUFF
@@ -214,9 +216,7 @@ jQuery.fn.visibilityToggle = function() {
 $(".selection").one("click", function () {
     $(".left-header").text("Character Chosen");
 
-    console.log("testing id on click, " + this.id);
     let selection = this.id;
-    
     if (selection == "slayer-container") {
         $("#dwarf-container").hide();
         $("#elf-container").hide();
@@ -264,13 +264,11 @@ $(".selection").one("click", function () {
     $(".enemy-list").visible();
     $(".shown-first").visible();
     $(".log-line-1").text("Choose an enemy to attack");
-    //$(".slayer-hp").text($(".slayer-hp").text()); // Gets hp and displays on screen
 })
 
 // When user selects an enemy to attack
 $(".evil-goblin").on("click", function() {
     $(".right-header").visible();
-    console.log("testing id on click goblin selection, " + this.id);
     let selection = this.id;
     // If there is no enemy selected then we move the goblin into position
     // Also setting the current enemy selected hp/attack power to global variables
@@ -297,7 +295,7 @@ $(".evil-goblin").on("click", function() {
             enemyHp = goblin_boss.hp;
             enemyAttackPower = goblin_boss.attack;
         } else {
-            console.log("Should not be able to get here");
+            // Should not be able to get here
         }
         
         //var $cloneGoblin = $("#goblin_1").clone();
@@ -305,14 +303,9 @@ $(".evil-goblin").on("click", function() {
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
         enemySelected = true; // So user does not fight mutiple enemies
         $(".attackButton").visible();
+        $(".potionButton").visible();
         //$(".runAwayButton").visible();
-        $(".usePotionButton").visible();
 
-        // enemyHp = $("."+this.id+"-hp").text(); // Gets the html number
-        // Stuff below not working, this.ObjectProperty does not work
-        /* console.log("this id test, " + this.id);
-        enemyHp = (this.id).hp;
-        console.log("this id.hp test, " + enemyHp);*/
     } else {
         $(".log-line-1").text("You're already attacking an enemy");
         $(".log-line-2").text("You can either attack or run away");
