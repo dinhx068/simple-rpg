@@ -1,12 +1,13 @@
 // GLOBAL VARIABLES
 var characterSelected = false;
 var enemySelected = false;
-var currentEnemy;
+var currentEnemy = "";
 
 var attackCount = 1;
 var killCount = 0;
 
 var userHp;
+var userMaxHp;
 var userAttackPower;
 var enemyHp;
 var enemyAttackPower;
@@ -22,7 +23,7 @@ var slayer = {
 
 var dwarf = {
     hp: 150,
-    attack: 6,
+    attack: 5,
 };
 
 var elf = {
@@ -31,7 +32,7 @@ var elf = {
 };
 
 var priestess = {
-    hp: 50,
+    hp: 60,
     attack: 15,
 };
 
@@ -43,17 +44,17 @@ var goodGoblin = {
 // ENEMIES
 var goblin_1 = {
     hp: 30,
-    attack: 1,
+    attack: 2,
 };
 
 var goblin_2 = {
     hp: 50,
-    attack: 2,
+    attack: 3,
 };
 
 var goblin_3 = {
     hp: 100,
-    attack: 3,
+    attack: 4,
 };
 
 var bad_goblin = {
@@ -63,7 +64,7 @@ var bad_goblin = {
 
 var goblin_boss = {
     hp: 300,
-    attack: 5,
+    attack: 6,
 };
 
 // FUNCTIONS
@@ -77,7 +78,9 @@ function attack() {
         enemyHp = enemyHp -userAttackPower;
         userDeadOrAlive();
         enemyKO();
-
+        console.log(currentEnemy);
+        $(".user-hp").html(userHp);
+        $("."+String(currentEnemy+"-hp")).html(enemyHp);
         console.log(userHp);
         console.log(enemyHp);
 
@@ -93,18 +96,29 @@ function attack() {
 
 // Testing purposes
 function usePotion() {
+    // If there are potion available then...
     if (potion > 0) {
-        userHp += 50;
-        potion --;
-        $(".log-line-1").text("You used a potion");
+        let expectedHp = userHp + 50;
+        if (expectedHp >= userMaxHp) {
+            console.log("testing"+ (userHp + 50));
+            userHp = userMaxHp;
+            potion --;
+            $(".user-hp").html(userHp);
+        } else {
+            userHp += 50;
+            potion --;
+            $(".user-hp").html(userHp);
+            console.log(expectedHp);
+            console.log(userHp);
+            console.log(userMaxHp);
+        }
+        $(".log-line-1").text("You used a potion, +50 health points");
         $(".log-line-2").text("");
     } else {
         $(".log-line-1").text("No potions to use");
         $(".log-line-2").text("");
     }
 }
-
-
 
 function runAway() {
     if (enemySelected == true) {
@@ -210,6 +224,7 @@ $(".selection").one("click", function () {
         $("#goblin-container").hide();
         //$(".bad-goblin").append($("#goblin-container")); // Not working as it should
         userHp = slayer.hp;
+        userMaxHp = slayer.hp;
         userAttackPower = slayer.attack;
     } else if (selection == "dwarf-container") {
         $("#slayer-container").hide();
@@ -217,6 +232,7 @@ $(".selection").one("click", function () {
         $("#priestess-container").hide();
         $("#goblin-container").hide();
         userHp = dwarf.hp;
+        userMaxHp = dwarf.hp;
         userAttackPower = dwarf.attack;
     } else if (selection == "elf-container") {
         $("#slayer-container").hide();
@@ -224,6 +240,7 @@ $(".selection").one("click", function () {
         $("#priestess-container").hide();
         $("#goblin-container").hide();
         userHp = elf.hp;
+        userMaxHp = elf.hp;
         userAttackPower = elf.attack;
     } else if (selection == "priestess-container") {
         $("#slayer-container").hide();
@@ -231,6 +248,7 @@ $(".selection").one("click", function () {
         $("#elf-container").hide();
         $("#goblin-container").hide();
         userHp = priestess.hp;
+        userMaxHp = priestess.hp;
         userAttackPower = priestess.attack;
     } else if (selection == "goblin-container") {
         $("#slayer-container").hide();
@@ -238,6 +256,7 @@ $(".selection").one("click", function () {
         $("#priestess-container").hide();
         $("#elf-container").hide();
         userHp = goodGoblin.hp;
+        userMaxHp = goodGoblin.hp;
         userAttackPower = goodGoblin.attack;
     }
 
