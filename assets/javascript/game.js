@@ -7,7 +7,7 @@ var killCount = 0;
 var userHp;
 var userAttackPower;
 var enemyHp;
-var userEnemyPower;
+var enemyAttackPower;
 
 
 // GOOD CHARACTERS
@@ -104,6 +104,8 @@ function usePotion() {
 }
 
 // JQUERY STUFF
+$(document).ready(function() {
+
 window.onload = function () {
     document.getElementById('button').onclick = function () {
         document.getElementById('modal').style.display = "none"
@@ -116,8 +118,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
-$(document).ready(function() {
 
 jQuery.fn.visible = function() {
     return this.css('visibility', 'visible');
@@ -134,6 +134,7 @@ jQuery.fn.visibilityToggle = function() {
 };
 
 // When th user selects on one of the starting characters
+// Also sets global variables to a value for damage calculation
 $(".selection").one("click", function () {
     $(".left-header").text("Character Chosen");
 
@@ -146,26 +147,36 @@ $(".selection").one("click", function () {
         $("#priestess-container").hide();
         $("#goblin-container").hide();
         //$(".bad-goblin").append($("#goblin-container")); // Not working as it should
+        userHp = slayer.hp;
+        userAttackPower = slayer.attack;
     } else if (selection == "dwarf-container") {
         $("#slayer-container").hide();
         $("#elf-container").hide();
         $("#priestess-container").hide();
         $("#goblin-container").hide();
+        userHp = dwarf.hp;
+        userAttackPower = dwarf.attack;
     } else if (selection == "elf-container") {
         $("#slayer-container").hide();
         $("#dwarf-container").hide();
         $("#priestess-container").hide();
         $("#goblin-container").hide();
+        userHp = elf.hp;
+        userAttackPower = elf.attack;
     } else if (selection == "priestess-container") {
         $("#slayer-container").hide();
         $("#dwarf-container").hide();
         $("#elf-container").hide();
         $("#goblin-container").hide();
+        userHp = priestess.hp;
+        userAttackPower = priestess.attack;
     } else if (selection == "goblin-container") {
         $("#slayer-container").hide();
         $("#dwarf-container").hide();
         $("#priestess-container").hide();
         $("#elf-container").hide();
+        userHp = goodGoblin.hp;
+        userAttackPower = goodGoblin.attack;
     }
 
     characterSelected = true;
@@ -178,8 +189,31 @@ $(".selection").one("click", function () {
 // When user selects an enemy to attack
 $(".evil-goblin").on("click", function() {
     $(".right-header").visible();
+    console.log("testing id on click goblin selection, " + this.id);
+    let selection = this.id;
     // If there is no enemy selected then we move the goblin into position
+    // Also setting the current enemy selected hp/attack power to global variables
+    // which is used for damage calculation during interaction
     if (!enemySelected) {
+        if (selection == "goblin_1") {
+            enemyHp = goblin_1.hp;
+            enemyAttackPower = goblin_1.attack;
+        } else if (selection == "goblin_2") {
+            enemyHp = goblin_2.hp;
+            enemyAttackPower = goblin_2.attack;
+        } else if (selection == "goblin_3") {
+            enemyHp = goblin_3.hp;
+            enemyAttackPower = goblin_3.attack;
+        } else if (selection == "bad_goblin") {
+            enemyHp = bad_goblin.hp;
+            enemyAttackPower = bad_goblin.attack;
+        } else if (selection == "goblin_boss"){
+            enemyHp = goblin_boss.hp;
+            enemyAttackPower = goblin_boss.attack;
+        } else {
+            console.log("Should not be able to get here");
+        }
+        
         //var $cloneGoblin = $("#goblin_1").clone();
         //$(".container-to-clone").append($cloneGoblin);
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
