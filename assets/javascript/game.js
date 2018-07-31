@@ -11,6 +11,7 @@ var userAttackPower;
 var enemyHp;
 var enemyAttackPower;
 
+var potion = 0;
 
 // GOOD CHARACTERS
 // Balancing needs to be done
@@ -42,27 +43,27 @@ var goodGoblin = {
 // ENEMIES
 var goblin_1 = {
     hp: 30,
-    attack: 3,
+    attack: 1,
 };
 
 var goblin_2 = {
     hp: 50,
-    attack: 4,
+    attack: 2,
 };
 
 var goblin_3 = {
     hp: 100,
-    attack: 5,
+    attack: 3,
 };
 
 var bad_goblin = {
-    hp: 175,
-    attack: 6,
+    hp: 125,
+    attack: 3,
 };
 
 var goblin_boss = {
-    hp: 350,
-    attack: 10,
+    hp: 300,
+    attack: 5,
 };
 
 // FUNCTIONS
@@ -70,12 +71,18 @@ function attack() {
     $(".log-line-1").text("Testing attack button");
     if (characterSelected == true && enemySelected == true) {
         $(".sword-placeholder").visible();
-        // Do calculations
-        // And Log onto screen
         console.log("Testing attack ");
+        incrementAttack();
+        userHp = userHp - enemyAttackPower;
+        enemyHp = enemyHp -userAttackPower;
+        userDeadOrAlive();
+        enemyKO();
+
+        console.log(userHp);
         console.log(enemyHp);
-        $(".log-line-1").text("You take x damage");
-        $(".log-line-2").text("The enemy takes x damage");
+
+        $(".log-line-1").text("You take " + enemyAttackPower + " damage");
+        $(".log-line-2").text("The enemy takes " + userAttackPower + " damage");
     } else {
         console.log("else characterSelected, " + characterSelected);
         console.log("else enemySelected, " + enemySelected);
@@ -86,9 +93,18 @@ function attack() {
 
 // Testing purposes
 function usePotion() {
-    $(".log-line-1").text("This is for testing purposes");
-    $(".log-line-2").text("");
+    if (potion > 0) {
+        userHp += 50;
+        potion --;
+        $(".log-line-1").text("You used a potion");
+        $(".log-line-2").text("");
+    } else {
+        $(".log-line-1").text("No potions to use");
+        $(".log-line-2").text("");
+    }
 }
+
+
 
 function runAway() {
     if (enemySelected == true) {
@@ -113,12 +129,37 @@ function incrementAttack() {
     }
 }
 
+function userDeadOrAlive() {
+    if (userHp <= 0  ) {
+        console.log("DEAD, well should be");
+    } else {
+        console.log("User hp is above zero");
+    }
+}
+
 function enemyKO() {
     if (enemyHp <= 0  ) {
         console.log(currentEnemy);
         $("#"+currentEnemy).hide();
+        $(".sword-placeholder").invisible();
+        $(".right-header").invisible();
         killCount ++;
         enemySelected = false;
+            if (killCount == 2){
+                $(".shown-second").visible();
+            } else if (killCount == 4) {
+                potion = 2;
+                $(".shown-last").visible();
+                $(".log-line-1").text("You find two potions");
+                $(".log-line-2").text("");
+            } else if (killCount == 5){
+                console.log("Victory screen");
+                $(".restartButton").visible();
+                
+            } else {
+                console.log("Not enough kills");
+                // Do nothing
+            }
     } else {
         console.log("Enemy is above zero hp");
     }
