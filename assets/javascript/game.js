@@ -1,7 +1,8 @@
-// GLOBAL VARIABLES
+// GLOBAL VARIABLES ===============================================================================
 var characterSelected = false;
 var enemySelected = false;
 var currentEnemy = "";
+var nameOfCurrentEnemyforHTML = "";
 
 var attackCount = 1;
 var killCount = 0;
@@ -14,16 +15,15 @@ var enemyAttackPower;
 
 var potion = 0;
 
-// GOOD CHARACTERS
-// Balancing needs to be done
+// OBJECTS ========================================================================================
 var slayer = {
     hp: 100,
     attack: 10,
 };
 
 var dwarf = {
-    hp: 150,
-    attack: 5,
+    hp: 125,
+    attack: 4,
 };
 
 var elf = {
@@ -43,7 +43,7 @@ var goodGoblin = {
 
 // ENEMIES
 var goblin_1 = {
-    hp: 30,
+    hp: 20,
     attack: 2,
 };
 
@@ -63,13 +63,13 @@ var bad_goblin = {
 };
 
 var goblin_boss = {
-    hp: 300,
-    attack: 6,
+    hp: 200,
+    attack: 10,
 };
 
-// FUNCTIONS
+// FUNCTIONS ======================================================================================
 function attack() {
-    if (characterSelected == true && enemySelected == true) {
+    if (characterSelected && enemySelected) {
         $(".sword-placeholder").visible();
         incrementAttack();
         userHp = userHp - enemyAttackPower;
@@ -81,42 +81,61 @@ function attack() {
         $(".user-hp").html(userHp);
         $("."+String(currentEnemy+"-hp")).html(enemyHp);
 
-        $(".log-line-1").text("You take " + enemyAttackPower + " damage");
-        $(".log-line-2").text("The enemy takes " + userAttackPower + " damage");
+        $(".log-line-1").text("You take " + enemyAttackPower + " damage from " + nameOfCurrentEnemyforHTML);
+        $(".log-line-2").text("The enemy takes " + userAttackPower + " damage from you");
     } else {
         $(".log-line-1").text("You do not have an enemy selected");
         $(".log-line-2").text("Select an enemy");
     }
 }
 
-// Testing purposes
+// Restore hp if user has potion available
 function usePotion() {
-    // If there are potion available then...
+    // In here the user takes damage for using a pottion while there is an enemy selected
+    if (enemySelected) {
+        checkUserHp();
+        userHp = userHp - enemyAttackPower;
+        $(".user-hp").html(userHp);
+        $(".log-line-2").text("You take " + enemyAttackPower + " damage from " + nameOfCurrentEnemyforHTML);
+    // Use a potion without getting hurt
+    } else {
+        checkUserHp();
+    }
+}
+
+function checkUserHp() {
+     // If there are potion(s) available then...
     if (potion > 0) {
         let expectedHp = userHp + 50;
         if (expectedHp >= userMaxHp) {
             userHp = userMaxHp;
             potion --;
+            $(".potionButton").html("Use potion " + "("+potion+")");
             $(".user-hp").html(userHp);
+
             $(".log-line-1").text("You used a potion to get max health");
             $(".log-line-2").text("");
         } else {
             userHp += 50;
             potion --;
+            $(".potionButton").html("Use potion " + "("+potion+")");
             $(".user-hp").html(userHp);
+
             $(".log-line-1").text("You used a potion, +50 health points");
             $(".log-line-2").text("");
         }
-
     } else {
-        $(".log-line-1").text("No potions to use");
+        $(".log-line-1").text("No potions to use!");
         $(".log-line-2").text("");
+
     }
 }
 
+// Is not used currently
 function runAway() {
     if (enemySelected == true) {
         enemySelected = false;
+
         $(".log-line-1").text("You fled from the enemy");
         $(".log-line-2").text("");
     } else {
@@ -139,6 +158,8 @@ function userDeadOrAlive() {
     if (userHp <= 0  ) {
         disableButtons();
         $(".restartButton").visible();
+        console.log("User has lost");
+
         $(".log-line-1").text("You have been defeated");
         $(".log-line-2").text("Try again? Restart button below");
     } else {
@@ -153,21 +174,32 @@ function enemyKO() {
         $(".right-header").invisible();
         killCount ++;
         enemySelected = false;
+
+        $(".log-line-1").text(nameOfCurrentEnemyforHTML + " has been defeated");
+        $(".log-line-2").text("");
             if (killCount == 2){
                 $(".shown-second").visible();
+            } else if (killCount == 3) {
+                potion++;
+                $(".potionButton").html("Use potion " + "("+potion+")");
+                $(".log-line-1").text("You find a potion");
+                $(".log-line-2").text("");
             } else if (killCount == 4) {
-                potion = 2;
+                potion++;
+                console.log("Boss appears");
                 $(".shown-last").visible();
-                $(".log-line-1").text("You find two potions");
+                $(".potionButton").html("Use potion " + "("+potion+")");
+
+                $(".log-line-1").text("You find a potion");
                 $(".log-line-2").text("");
             } else if (killCount == 5){
                 // Victory!
+                console.log("Victory!");
                 disableButtons();
                 $(".restartButton").visible();
 
                 $(".log-line-1").text("You've completed the game, thanks for playing!!");
                 $(".log-line-2").text("");
-                
             } else {
                 // Do nothing
             }
@@ -176,12 +208,29 @@ function enemyKO() {
     }
 }
 
+// I for updating the html log to display enemy character
+function checkEnemyName() {
+    if (currentEnemy == "goblin_1") {
+        nameOfCurrentEnemyforHTML = "Little Goblin";
+    } else if (currentEnemy == "goblin_2"){
+        nameOfCurrentEnemyforHTML = "Goblin"
+    } else if (currentEnemy == "goblin_3"){
+        nameOfCurrentEnemyforHTML = "Crazy Goblin"
+    } else if (currentEnemy == "goblin_4"){
+        nameOfCurrentEnemyforHTML = "Goblin Chief"
+    } else if (currentEnemy == "goblin_boss"){
+        nameOfCurrentEnemyforHTML = "Goblin Boss"
+    } else {
+        // We should not end up here but I put it in
+    }
+}
+
 function disableButtons() {
     $(".attackButton").prop("disabled",true);
     $(".potionButton").prop("disabled",true);
 }
 
-// JQUERY STUFF
+// JQUERY STUFF ===================================================================================
 $(document).ready(function() {
 
 window.onload = function () {
@@ -263,6 +312,7 @@ $(".selection").one("click", function () {
     characterSelected = true;
     $(".enemy-list").visible();
     $(".shown-first").visible();
+
     $(".log-line-1").text("Choose an enemy to attack");
 })
 
@@ -298,6 +348,7 @@ $(".evil-goblin").on("click", function() {
             // Should not be able to get here
         }
         
+        checkEnemyName(); // For displaying normal enemy name strings
         //var $cloneGoblin = $("#goblin_1").clone();
         //$(".container-to-clone").append($cloneGoblin);
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
@@ -305,10 +356,11 @@ $(".evil-goblin").on("click", function() {
         $(".attackButton").visible();
         $(".potionButton").visible();
         //$(".runAwayButton").visible();
-
+        $(".log-line-1").text("Enemy target is " + nameOfCurrentEnemyforHTML);
+        $(".log-line-2").text("");
     } else {
-        $(".log-line-1").text("You're already attacking an enemy");
-        $(".log-line-2").text("You can either attack or run away");
+        $(".log-line-1").text("You are already attacking an enemy");
+        $(".log-line-2").text("You can either attack or or use a potion if you have any");
     }
 
 })
