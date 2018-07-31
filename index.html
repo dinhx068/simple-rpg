@@ -73,7 +73,7 @@
                     </ul>
                 </div> <!-- End of row 1 (Character selection) -->
 
-            <p class="enemy-list">Enemies Available to Attack</p>
+            <p class="enemy-list hidden-on-start">Enemies Available to Attack</p>
                 
             <div class="row-2">
                 <ul class="row-Images">
@@ -114,10 +114,15 @@
                         <span class="goblin_boss-hp">200</span><span>/</span class="goblin_boss-max-hp"><span>200</span>
                     </div>
 
+                    <!-- Place holder so row does not collapse -->
+                    <div class="image-container hidden-on-start">
+                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
+                    </div>
+
                 </ul>
             </div> <!-- End of row 2 (Goblins) -->
 
-            <p>Actions</p> 
+            <p class="actions hidden-on-start">Actions</p> 
             <!-- Some combat functionality-->
             <button class="attackButton hidden-on-start" onclick="attack()">Attack</button>
             <button class="potionButton hidden-on-start" onclick="usePotion()">Use potion (0)</button> 

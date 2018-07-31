@@ -344,6 +344,7 @@ $(".evil-goblin").on("click", function() {
             currentEnemy = selection;
             enemyHp = goblin_boss.hp;
             enemyAttackPower = goblin_boss.attack;
+            $(".enemy-list").invisible();
         } else {
             // Should not be able to get here
         }
@@ -353,6 +354,7 @@ $(".evil-goblin").on("click", function() {
         //$(".container-to-clone").append($cloneGoblin);
         $(".container-to-clone").append($("#"+this.id)); // But removes the current position copy
         enemySelected = true; // So user does not fight mutiple enemies
+        $(".actions").visible();
         $(".attackButton").visible();
         $(".potionButton").visible();
         //$(".runAwayButton").visible();
