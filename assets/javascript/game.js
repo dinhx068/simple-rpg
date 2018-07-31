@@ -158,7 +158,7 @@ function userDeadOrAlive() {
     if (userHp <= 0  ) {
         disableButtons();
         $(".restartButton").visible();
-        console.log("User has lost");
+        console.log("User has lost, log?");
 
         $(".log-line-1").text("You have been defeated");
         $(".log-line-2").text("Try again? Restart button below");
@@ -175,28 +175,32 @@ function enemyKO() {
         killCount ++;
         enemySelected = false;
 
+        console.log(nameOfCurrentEnemyforHTML + " has been defeated, log?");
         $(".log-line-1").text(nameOfCurrentEnemyforHTML + " has been defeated");
         $(".log-line-2").text("");
-            if (killCount == 2){
-                $(".shown-second").visible();
-            } else if (killCount == 3) {
+            if (killCount == 3) {
                 potion++;
+                $(".shown-second").visible();
                 $(".potionButton").html("Use potion " + "("+potion+")");
+
+                console.log("You find 1st potion, log?");
                 $(".log-line-1").text("You find a potion");
                 $(".log-line-2").text("");
             } else if (killCount == 4) {
                 potion++;
-                console.log("Boss appears");
+                $(".enemy-list").html("Goblin Boss Appears");
+                console.log("You find 2nd potion, log?");
                 $(".shown-last").visible();
+                $(".enemy-list").visible();
                 $(".potionButton").html("Use potion " + "("+potion+")");
 
                 $(".log-line-1").text("You find a potion");
                 $(".log-line-2").text("");
             } else if (killCount == 5){
                 // Victory!
-                console.log("Victory!");
                 disableButtons();
                 $(".restartButton").visible();
+                console.log("Victory! Log?");
 
                 $(".log-line-1").text("You've completed the game, thanks for playing!!");
                 $(".log-line-2").text("");
@@ -340,6 +344,7 @@ $(".evil-goblin").on("click", function() {
             currentEnemy = selection;
             enemyHp = bad_goblin.hp;
             enemyAttackPower = bad_goblin.attack;
+            $(".enemy-list").invisible();
         } else if (selection == "goblin_boss"){
             currentEnemy = selection;
             enemyHp = goblin_boss.hp;
