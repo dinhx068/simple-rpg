@@ -4,4 +4,4 @@ Some things to possibly add in the future:
 - [ ] Add a fancy "Goblin Slayer fan game" title somewhere
 - [ ] Style the buttons/log container
 - [ ] Add sounds on attack or potion use
-[ ] Implement a run away function
+- [ ] Implement a run away function
