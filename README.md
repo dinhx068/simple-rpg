@@ -3,5 +3,5 @@ Working on this assignment was really fun for myself. I enjoyed making this and 
 Some things to possibly add in the future:
 - [ ] Add a fancy "Goblin Slayer fan game" title somewhere
 - [ ] Style the buttons/log container
-- [ ] Adding sounds on attack or potion use
-- [ ] Implement a run away function
+- [ ] Add sounds on attack or potion use
+[ ] Implement a run away function
