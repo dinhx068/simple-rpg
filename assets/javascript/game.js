@@ -76,13 +76,9 @@ function attack() {
         enemyHp = enemyHp -userAttackPower;
         userDeadOrAlive();
         enemyKO();
-
         // Update html hp numbers
         $(".user-hp").html(userHp);
         $("."+String(currentEnemy+"-hp")).html(enemyHp);
-
-        $(".log-line-1").text("You take " + enemyAttackPower + " damage from " + nameOfCurrentEnemyforHTML);
-        $(".log-line-2").text("The enemy takes " + userAttackPower + " damage from you");
     } else {
         $(".log-line-1").text("You do not have an enemy selected");
         $(".log-line-2").text("Select an enemy");
@@ -127,7 +123,6 @@ function checkUserHp() {
     } else {
         $(".log-line-1").text("No potions to use!");
         $(".log-line-2").text("");
-
     }
 }
 
@@ -158,12 +153,12 @@ function userDeadOrAlive() {
     if (userHp <= 0  ) {
         disableButtons();
         $(".restartButton").visible();
-        console.log("User has lost, log?");
 
         $(".log-line-1").text("You have been defeated");
         $(".log-line-2").text("Try again? Restart button below");
     } else {
-        // Do nothing
+        $(".log-line-1").text("You take " + enemyAttackPower + " damage from " + nameOfCurrentEnemyforHTML);
+        $(".log-line-2").text("The enemy takes " + userAttackPower + " damage from you");
     }
 }
 
@@ -175,7 +170,6 @@ function enemyKO() {
         killCount ++;
         enemySelected = false;
 
-        console.log(nameOfCurrentEnemyforHTML + " has been defeated, log?");
         $(".log-line-1").text(nameOfCurrentEnemyforHTML + " has been defeated");
         $(".log-line-2").text("");
             if (killCount == 3) {
@@ -183,13 +177,11 @@ function enemyKO() {
                 $(".shown-second").visible();
                 $(".potionButton").html("Use potion " + "("+potion+")");
 
-                console.log("You find 1st potion, log?");
                 $(".log-line-1").text("You find a potion");
                 $(".log-line-2").text("");
             } else if (killCount == 4) {
                 potion++;
                 $(".enemy-list").html("Goblin Boss Appears");
-                console.log("You find 2nd potion, log?");
                 $(".shown-last").visible();
                 $(".enemy-list").visible();
                 $(".potionButton").html("Use potion " + "("+potion+")");
@@ -200,10 +192,9 @@ function enemyKO() {
                 // Victory!
                 disableButtons();
                 $(".restartButton").visible();
-                console.log("Victory! Log?");
 
                 $(".log-line-1").text("You've completed the game, thanks for playing!!");
-                $(".log-line-2").text("");
+                $(".log-line-2").text("There's a hidden link of the trailer in the first pop up");
             } else {
                 // Do nothing
             }
