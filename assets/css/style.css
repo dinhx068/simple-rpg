@@ -88,8 +88,12 @@ img {
 }
 
 #log-container {
-    width: 400px;
+    width: 420px;
     padding: 10px;
+}
+
+.panel-default {
+    height: 136px;
 }
 
 .action-container {

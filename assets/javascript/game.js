@@ -358,7 +358,7 @@ $(".evil-goblin").on("click", function() {
         $(".log-line-2").text("");
     } else {
         $(".log-line-1").text("You are already attacking an enemy");
-        $(".log-line-2").text("You can either attack or or use a potion if you have any");
+        $(".log-line-2").text("");
     }
 
 })
